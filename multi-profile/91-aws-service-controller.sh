@@ -10,7 +10,7 @@ export ACK_SYSTEM_NAMESPACE=ack-system
 export EKS_CLUSTER_NAME=$cluster_name
 export HELM_EXPERIMENTAL_OCI=1
 
-aws ecr-public get-login-password --region us-east-1 | helm registry login --username AWS --password-stdin public.ecr.aws
+aws ecr-public get-login-password --region us-west-2 | helm registry login --username AWS --password-stdin public.ecr.aws
 helm install --create-namespace -n $ACK_SYSTEM_NAMESPACE ack-$SERVICE-controller \
   oci://public.ecr.aws/aws-controllers-k8s/$SERVICE-chart --version=$RELEASE_VERSION --set=aws.region=$AWS_REGION
 
@@ -19,7 +19,7 @@ sleep 5
 
 #STEP 1: Create an OIDC identity provider for your cluster
 #https://aws-controllers-k8s.github.io/community/docs/user-docs/irsa/#step-1-create-an-oidc-identity-provider-for-your-cluster
-eksctl utils associate-iam-oidc-provider --cluster $cluster_name --region us-west-1 --approve
+eksctl utils associate-iam-oidc-provider --cluster $cluster_name --region us-west-2 --approve
 
 #STEP 2: Create an IAM role and policy for your service account
 # Update the service name variables as needed
