@@ -76,11 +76,11 @@ sudo apt install pv #required for demo-magic
 
 
 echo
-echo export AWS_ACCOUNT_ID=$aws_account_id >> .bashrc
+echo export AWS_ACCOUNT_ID=$aws_account_id >> $HOME/.bashrc
 echo
-echo export AWS_REGION=$aws_region_code >> .bashrc
+echo export AWS_REGION=$aws_region_code >> $HOME/.bashrc
 echo
-echo export PIVNET_USERNAME=$pivnet_username >> .bashrc
+echo export PIVNET_USERNAME=$pivnet_username >> $HOME/.bashrc
 
 rm secrets.json
 cat <<EOF | tee secrets.json

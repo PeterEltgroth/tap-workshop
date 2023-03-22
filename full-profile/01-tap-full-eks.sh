@@ -346,7 +346,7 @@ mkdir $HOME/tanzu
 wget https://network.pivotal.io/api/v2/products/tanzu-application-platform/releases/1260043/product_files/1433868/download --header="Authorization: Bearer ${access_token}" -O $HOME/tanzu/${cli_filename}
 tar -xvf $HOME/tanzu/${cli_filename} -C $HOME/tanzu
 
-cd tanzu
+cd $HOME/tanzu
 
 sudo install cli/core/$VERSION/tanzu-core-linux_amd64 /usr/local/bin/tanzu
 
