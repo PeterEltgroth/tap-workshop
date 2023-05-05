@@ -1,17 +1,18 @@
 #!/bin/bash
 
-read -p "Full Domain Name: " full_domain
+#read -p "Full Domain Name: " full_domain
+full_domain=full.tap.isveng.com
 
 export EKS_CLUSTER_NAME=tap-full
 export TANZU_CLI_NO_INIT=true
-export VERSION=v0.25.4
-export TAP_VERSION=1.4.2
+export VERSION=v0.28.11
+export TAP_VERSION=1.5.0
 
 target_tbs_repo=tap-build-service
 git_catalog_repository=tanzu-application-platform
 
-cli_filename=tanzu-framework-linux-amd64-v0.25.4.5.tar
-essentials_filename=tanzu-cluster-essentials-linux-amd64-1.4.1.tgz
+cli_filename=tanzu-framework-linux-amd64-v0.28.11.tar
+essentials_filename=tanzu-cluster-essentials-linux-amd64-1.5.0.tgz
 
 
 # 1. CAPTURE PIVNET SECRETS
@@ -336,7 +337,7 @@ echo "INSTALLING TANZU AND CLUSTER ESSENTIALS"
 rm -rf $HOME/tanzu
 mkdir $HOME/tanzu
 
-wget https://network.pivotal.io/api/v2/products/tanzu-application-platform/releases/1260043/product_files/1433868/download --header="Authorization: Bearer ${access_token}" -O $HOME/tanzu/${cli_filename}
+wget https://network.tanzu.vmware.com/api/v2/products/tanzu-application-platform/releases/1283005/product_files/1446073/download --header="Authorization: Bearer ${access_token}" -O $HOME/tanzu/${cli_filename}
 tar -xvf $HOME/tanzu/${cli_filename} -C $HOME/tanzu
 
 cd $HOME/tanzu
@@ -352,10 +353,10 @@ cd $HOME
 rm -rf $HOME/tanzu-cluster-essentials
 mkdir $HOME/tanzu-cluster-essentials
 
-wget https://network.pivotal.io/api/v2/products/tanzu-cluster-essentials/releases/1249982/product_files/1423994/download --header="Authorization: Bearer ${access_token}" -O $HOME/tanzu-cluster-essentials/${essentials_filename}
+wget https://network.tanzu.vmware.com/api/v2/products/tanzu-cluster-essentials/releases/1275537/product_files/1460876/download --header="Authorization: Bearer ${access_token}" -O $HOME/tanzu-cluster-essentials/${essentials_filename}
 tar -xvf $HOME/tanzu-cluster-essentials/${essentials_filename} -C $HOME/tanzu-cluster-essentials
 
-export INSTALL_BUNDLE=registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle@sha256:2354688e46d4bb4060f74fca069513c9b42ffa17a0a6d5b0dbb81ed52242ea44
+export INSTALL_BUNDLE=registry.tanzu.vmware.com/tanzu-cluster-essentials/cluster-essentials-bundle@sha256:79abddbc3b49b44fc368fede0dab93c266ff7c1fe305e2d555ed52d00361b446
 export INSTALL_REGISTRY_HOSTNAME=registry.tanzu.vmware.com
 export INSTALL_REGISTRY_USERNAME=$PIVNET_USERNAME
 export INSTALL_REGISTRY_PASSWORD=$pivnet_password
